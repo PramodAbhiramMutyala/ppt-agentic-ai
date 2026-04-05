@@ -1,73 +1,197 @@
-# agentic-ppt-ai
-A full-stack, multi-agent AI system that transforms user prompts into structured “napkin-style” notes and automatically generates presentation-ready PowerPoint slides, equipped with an Enterprise Chat UI!
+# Agentic PPT AI
+Transform any topic into a professionally generated PowerPoint presentation in seconds.
 
-## Architecture
+## 🎯 Quick Overview
 
-1. **Python AI Backend (FastAPI)**: Handles LLM orchestration, Strict Topic Grounding validation, physical Image Generation via HuggingFace, and Python-PPTX export logic.
-2. **React Chat UI (Vite + TypeScript)**: Web client that interfaces with the AI backend and streams presentation generation progress.
+**Agentic PPT AI** is an intelligent presentation generation system that uses multi-agent AI orchestration to automatically create structured, visually enhanced PowerPoint slides.
+
+- **Input:** A simple topic prompt (e.g., "Baahubali movie", "Quantum Computing")
+- **Process:** Multi-agent LLM pipeline plans content, generates slides, downloads images
+- **Output:** Professional PowerPoint file ready to use
+
+### Key Features
+- 🤖 Multi-agent AI orchestration (planning, writing, image generation)
+- 📊 Real-time slide generation streaming
+- 🖼️ Automatic image generation for each slide
+- 💬 Interactive chat-based interface
+- ⚡ Fast generation (typical: 30-60 seconds per presentation)
 
 ---
 
-## 🛠️ Setup Instructions
+## � Prerequisites
 
-### 1. Backend Setup
+### System Requirements
+- **Python:** 3.8+ (get from [python.org](https://www.python.org/))
+- **Node.js:** 18+ (get from [nodejs.org](https://nodejs.org/))
+- **HuggingFace API Key:** Free token from [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
 
-Ensure you have Python installed.
+### Installation
 
-1. **Wait/Activate your Virtual Environment**:
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/PramodAbhiramMutyala/ppt-agentic-ai.git
+   cd ppt-agentic-ai
+   ```
+
+2. **Setup Python Virtual Environment**
    ```bash
    # Windows
-   .\\venv\\Scripts\\activate
+   python -m venv venv
+   .\venv\Scripts\activate
    
-   # Linux/MacOS
+   # Linux/macOS
+   python3 -m venv venv
    source venv/bin/activate
    ```
 
-2. **Install Python Dependencies**:
+3. **Install Python Dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Configure API Keys**:
-   - Open `.env` in the root of the project.
-   - Replace the placeholder with your **HuggingFace API Key** (Get free token [here](https://huggingface.co/settings/tokens)).
-   - `HUGGINGFACE_API_KEY=hf_YourToken...`
+4. **Setup Environment Variables**
+   ```bash
+   # Create .env file in project root
+   HUGGINGFACE_API_KEY=hf_your_token_here
+   ```
+   Get your token: https://huggingface.co/settings/tokens
 
-### 2. Frontend Setup (React)
-
-Ensure you have [Node.js](https://nodejs.org/) installed.
-
-Install dependencies:
-```bash
-cd web_app
-npm install
-```
+5. **Install Frontend Dependencies**
+   ```bash
+   cd web_app
+   npm install
+   ```
 
 ---
 
-## 🚀 Running the Full App
+## 🚀 How to Run
 
-Since this is now a bridged Client/Server architecture, you must run both pieces!
+### Quick Start (Windows)
+```powershell
+.\quick-start.ps1
+```
+Then select option **3** to start both servers.
 
-### Step 1: Start the AI API Server
-Open a terminal and run the backend. This spins up the server on port 8000.
+### Manual Setup (Any OS)
+
+**Terminal 1 - Start Backend API (port 8000):**
 ```bash
-# Must run from the root project directory!
+# From project root
 uvicorn backend.app:app --reload
 ```
+You should see: `Uvicorn running on http://127.0.0.1:8000`
 
-### Step 2: Start the React Presentation UI
-Open a **second terminal**, change into the React app directory, and run it.
+**Terminal 2 - Start React Frontend (port 5173):**
 ```bash
+# From project root
 cd web_app
 npm run dev
 ```
+You should see: `Local: http://localhost:5173/`
+
+### Access Application
+Open your browser and go to:
+```
+http://localhost:5173
+```
+
+### Generate Your First Presentation
+
+1. Type a topic in the chat: `"Baahubali movie"` or `"Quantum Computing"`
+2. Watch real-time slide generation in the chat
+3. Click **Download** when complete
+4. Open the PowerPoint file (saved in project root)
 
 ---
 
-## Output Behavior
+## 🏗️ Project Structure
 
-When you type a prompt (e.g. "Baahubali movie") into the UI chat:
-1. The React UI calls the local Python API.
-2. The Orchestrator automatically plans titles, tests valid content, downloads images, and compiles a completely physical PowerPoint `.pptx` slide file right into your project folder.
-3. The AI responds dynamically back into the Chat UI confirming it was built, dropping the parsed structured Notes right onto your screen.
+```
+ppt-agentic-ai/
+├── backend/                    # Python FastAPI server
+│   ├── app.py                 # Main API entry point
+│   ├── orchestrator.py        # Multi-agent pipeline
+│   ├── agents.py              # LLM implementations
+│   ├── export.py              # PowerPoint generation
+│   ├── validator.py           # Content validation
+│   └── assets/                # Generated images
+│
+├── web_app/                   # React + TypeScript frontend
+│   ├── src/
+│   │   ├── App.tsx           # Main React component
+│   │   ├── components/       # UI components
+│   │   └── services/api.ts   # Backend API client
+│   └── package.json
+│
+├── .env                       # Environment variables
+├── requirements.txt           # Python packages
+└── README.md                  # This file
+```
+
+---
+
+## 🔧 Tech Stack
+
+**Backend:**
+- FastAPI (Python web framework)
+- Uvicorn (ASGI server)
+- python-pptx (PowerPoint generation)
+- HuggingFace API (LLM & image generation)
+
+**Frontend:**
+- React 18 (UI framework)
+- TypeScript 5.9 (type safety)
+- Vite 5.4 (build tool)
+- CSS Variables (dark theme)
+
+**API Communication:**
+- NDJSON streaming for real-time updates
+- CORS enabled for cross-origin requests
+
+---
+
+## 📝 Example Usage
+
+```
+User: "Tell me about artificial intelligence in healthcare"
+
+System Response:
+1. Planning presentation structure...
+2. Generating slide titles...
+3. Creating slide content...
+4. Downloading images for each slide...
+5. Generating PowerPoint file...
+
+Output: AI_in_Modern_Healthcare_Presentation.pptx ✅
+```
+
+---
+
+## 🐛 Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| `ENOENT: no such file or directory, open 'package.json'` | Run `npm install` from `web_app/` directory |
+| `Cannot connect to backend` | Ensure backend running on port 8000 |
+| `API key invalid` | Verify HuggingFace token in `.env` file |
+| `Port already in use` | Change port in backend/app.py or frontend vite.config.ts |
+| `npm: command not found` | Install Node.js from nodejs.org |
+
+---
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+---
+
+## 🔗 Resources
+
+- **FastAPI Docs:** https://fastapi.tiangolo.com
+- **React Docs:** https://react.dev
+- **HuggingFace:** https://huggingface.co
+- **GitHub:** https://github.com/PramodAbhiramMutyala/ppt-agentic-ai
+
+---
+
+**Ready to generate presentations?** Start with `.\quick-start.ps1` on Windows or follow manual setup above! 🚀
