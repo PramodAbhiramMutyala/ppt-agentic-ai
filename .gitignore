@@ -1,0 +1,12 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# React/Vite
+web_app/node_modules/
+web_app/dist/
+
+# Flutter (deprecated frontend)
+frontend/.dart_tool/
+frontend/build/
